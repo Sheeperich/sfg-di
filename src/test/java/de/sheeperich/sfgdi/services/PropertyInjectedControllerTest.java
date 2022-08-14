@@ -11,7 +11,12 @@ class PropertyInjectedControllerTest {
     @BeforeEach
     void setup(){
         controller = new PropertyInjectedController();
-        controller.greetingService = new GreetingServiceImpl();
+        controller.greetingService = new GreetingService() {
+            @Override
+            public String sayGreeting() {
+                return null;
+            }
+        };
     }
 
     @Test

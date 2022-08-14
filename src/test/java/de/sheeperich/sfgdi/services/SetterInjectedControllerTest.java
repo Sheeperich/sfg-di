@@ -10,7 +10,12 @@ class SetterInjectedControllerTest {
     @BeforeEach
     void setUp() {
         controller = new SetterInjectedController();
-        controller.setGreetingService(new GreetingServiceImpl());
+        controller.setGreetingService(new GreetingService() {
+            @Override
+            public String sayGreeting() {
+                return null;
+            }
+        });
     }
 
     @Test
