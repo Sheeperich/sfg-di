@@ -1,6 +1,8 @@
 package de.sheeperich.sfgdi;
 
 import de.sheeperich.sfgdi.controllers.*;
+import de.sheeperich.sfgdi.services.PrototypeBean;
+import de.sheeperich.sfgdi.services.SingletonBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -32,6 +34,17 @@ public class SfgDiApplication {
 		I18nController i18Controller = (I18nController)  ctx.getBean("i18nController");
 
 		System.out.println(i18Controller.sayHello());
+
+		System.out.println("Bean Scope-------------------");
+		SingletonBean singletonBean1 = ctx.getBean(SingletonBean.class);
+		System.out.println(singletonBean1.getMyScope());
+		SingletonBean singletonBean2 = ctx.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.getMyScope());
+
+		PrototypeBean prototypeBean1 = ctx.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean1.getMyScope());
+		PrototypeBean prototypeBean2 = ctx.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.getMyScope());
 	}
 
 }
