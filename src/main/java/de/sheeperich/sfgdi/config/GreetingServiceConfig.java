@@ -7,20 +7,22 @@ import de.sheeperich.sfgdi.repositories.EnglishGreetingRepository;
 import de.sheeperich.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import de.sheeperich.sfgdi.services.*;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 
 /**
  * @author Sheeperich
  */
+@EnableConfigurationProperties(SfgConstructorConfig.class)
 @PropertySource("classpath:application.properties")
 @Configuration
 public class GreetingServiceConfig {
     @Bean
-    FakeDataSource fakeDataSource(SfgConfiguration sfgConfiguration){
+    FakeDataSource fakeDataSource(SfgConstructorConfig sfgConstructorConfig){
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setJdbcurl(sfgConfiguration.getJbdcurl());
-        fakeDataSource.setPassword(sfgConfiguration.getPassword());
-        fakeDataSource.setUsername(sfgConfiguration.getUsername());
+        fakeDataSource.setJdbcurl(sfgConstructorConfig.getJdbcurl());
+        fakeDataSource.setPassword(sfgConstructorConfig.getPassword());
+        fakeDataSource.setUsername(sfgConstructorConfig.getUsername());
 
         return fakeDataSource;
     }
