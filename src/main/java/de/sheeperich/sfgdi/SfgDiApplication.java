@@ -1,5 +1,6 @@
 package de.sheeperich.sfgdi;
 
+import de.sheeperich.sfgdi.config.SfgConfiguration;
 import de.sheeperich.sfgdi.controllers.*;
 import de.sheeperich.sfgdi.datasources.FakeDataSource;
 import de.sheeperich.sfgdi.services.PrototypeBean;
@@ -52,6 +53,13 @@ public class SfgDiApplication {
 		System.out.println(fakeDataSource.getJdbcurl());
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getUsername());
+
+		System.out.println("------ Config Props Bean");
+		SfgConfiguration sfgConfiguration = ctx.getBean(SfgConfiguration.class);
+
+		System.out.println(sfgConfiguration.getUsername());
+		System.out.println(sfgConfiguration.getPassword());
+		System.out.println(sfgConfiguration.getJbdcurl());
 	}
 
 }
