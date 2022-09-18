@@ -2,20 +2,30 @@ package de.sheeperich.sfgdi.config;
 
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
+import de.sheeperich.sfgdi.datasources.FakeDataSource;
 import de.sheeperich.sfgdi.repositories.EnglishGreetingRepository;
 import de.sheeperich.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import de.sheeperich.sfgdi.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
 
 /**
  * @author Sheeperich
  */
+@PropertySource("classpath:application.properties")
 @Configuration
 public class GreetingServiceConfig {
+    @Bean
+    FakeDataSource fakeDataSource(@Value("${de.sheeperich.username}")String username,
+                                  @Value("${de.sheeperich.password}") String password,
+                                  @Value("${de.sheeperich.jbdcurl}") String jdbcurl){
+        FakeDataSource fakeDataSource = new FakeDataSource();
+        fakeDataSource.setJdbcurl(jdbcurl);
+        fakeDataSource.setPassword(password);
+        fakeDataSource.setUsername(username);
 
+        return fakeDataSource;
+    }
     @Bean
     PetServiceFactory petServiceFactory(){
         return new PetServiceFactory();
